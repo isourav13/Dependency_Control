@@ -49,7 +49,7 @@ for node in G.nodes:
         node_colors.append("white")
 
 # Draw the graph with a better layout
-plt.figure(figsize=(10, 10))
+plt.figure(figsize=(12, 10))
 pos = nx.spring_layout(G, seed=42)
 
 nx.draw(G, pos, with_labels=True, node_color=node_colors, node_size=800, font_size=8, edge_color="gray", arrows=True, arrowstyle="->", arrowsize=10)

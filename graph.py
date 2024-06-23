@@ -7,11 +7,11 @@ G = nx.DiGraph()
 
 # Define nodes and their hierarchical relationships with probabilities
 nodes = {
-    "Queries": {"Read Queries": 0.4, "Write Queries": 0.3, "Search Queries": 0.1, "Transactional Queries": 0.1, "Caching Queries": 0.1},
+    "Queries": {"Read Queries": 0.4, "Write Queries": 0.3, "Search Queries": 0.3},
     "Read Queries": {"Simple Reads": 0.3, "Complex Reads": 0.4, "Filtered Reads": 0.2, "Aggregations": 0.1, "Joins": 0.2},
     "Filtered Reads": {"Range Queries": 0.5, "Multi-attribute Filters": 0.5},
     "Aggregations": {"Count": 0.4, "Sum": 0.3, "Min/Max": 0.3},
-    "Joins": {"Inner Joins": 0.4, "Left Joins": 0.2, "Right Joins": 0.2, "Full Joins": 0.2},
+    "Joins": {"Inner Joins": 0.6, "Left Joins": 0.1, "Right Joins": 0.1, "Full Joins": 0.2},
     "Write Queries": {"Create": 0.4, "Update": 0.3, "Delete": 0.2, "Upsert": 0.1},
     "Create": {"Single Create": 0.6, "Bulk Create": 0.4},
     "Update": {"Full Update": 0.4, "Partial Update (Patch)": 0.4, "Bulk Update": 0.2},

@@ -46,5 +46,5 @@ for node in G_pg.nodes():
 # Draw the graph
 plt.figure(figsize=(30, 20))  # Adjust figsize to accommodate left-to-right layout
 G_pg.layout(prog="dot")  # Use 'dot' layout algorithm for hierarchical graphs
-G_pg.draw(path="horizontal_graph_with_probs.png", format="png")
+G_pg.draw(path="graph.png", format="png")
 

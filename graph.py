@@ -35,7 +35,7 @@ for parent, children in nodes.items():
 
 # Create a pygraphviz AGraph from the NetworkX graph for better layout
 G_pg = nx.nx_agraph.to_agraph(G)
-G_pg.graph_attr.update(rankdir="TB")  # Set the layout direction to top-to-bottom
+G_pg.graph_attr.update(rankdir="LR")  # Set the layout direction to left-to-right
 G_pg.node_attr.update(style="filled", fontsize=20)  # Increase font size for nodes
 G_pg.edge_attr.update(fontsize=16)  # Increase font size for edge labels
 
@@ -44,7 +44,7 @@ for node in G_pg.nodes():
     node.attr['fillcolor'] = colors.get(node, "white")
 
 # Draw the graph
-plt.figure(figsize=(20, 30))
+plt.figure(figsize=(30, 20))  # Adjust figsize to accommodate left-to-right layout
 G_pg.layout(prog="dot")  # Use 'dot' layout algorithm for hierarchical graphs
-G_pg.draw(path="graph.png", format="png")
+G_pg.draw(path="horizontal_graph_with_probs.png", format="png")
 

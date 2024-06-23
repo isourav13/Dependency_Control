@@ -5,17 +5,17 @@ import pygraphviz as pgv
 # Create a directed graph
 G = nx.DiGraph()
 
-# Define nodes and their hierarchical relationships
+# Define nodes and their hierarchical relationships with probabilities
 nodes = {
-    "Queries": ["Read Queries", "Write Queries", "Search Queries", "Transactional Queries", "Caching Queries"],
-    "Read Queries": ["Simple Reads", "Complex Reads", "Filtered Reads", "Aggregations", "Joins"],
-    "Filtered Reads": ["Range Queries", "Multi-attribute Filters"],
-    "Aggregations": ["Count", "Sum", "Min/Max"],
-    "Joins": ["Inner Joins", "Left Joins", "Right Joins", "Full Joins"],
-    "Write Queries": ["Create", "Update", "Delete", "Upsert"],
-    "Create": ["Single Create", "Bulk Create"],
-    "Update": ["Full Update", "Partial Update (Patch)", "Bulk Update"],
-    "Delete": ["Soft Delete", "Hard Delete"]
+    "Queries": {"Read Queries": 0.4, "Write Queries": 0.3, "Search Queries": 0.1, "Transactional Queries": 0.1, "Caching Queries": 0.1},
+    "Read Queries": {"Simple Reads": 0.3, "Complex Reads": 0.4, "Filtered Reads": 0.2, "Aggregations": 0.1, "Joins": 0.2},
+    "Filtered Reads": {"Range Queries": 0.5, "Multi-attribute Filters": 0.5},
+    "Aggregations": {"Count": 0.4, "Sum": 0.3, "Min/Max": 0.3},
+    "Joins": {"Inner Joins": 0.4, "Left Joins": 0.2, "Right Joins": 0.2, "Full Joins": 0.2},
+    "Write Queries": {"Create": 0.4, "Update": 0.3, "Delete": 0.2, "Upsert": 0.1},
+    "Create": {"Single Create": 0.6, "Bulk Create": 0.4},
+    "Update": {"Full Update": 0.4, "Partial Update (Patch)": 0.4, "Bulk Update": 0.2},
+    "Delete": {"Soft Delete": 0.5, "Hard Delete": 0.5}
 }
 
 # Define node colors
@@ -28,28 +28,23 @@ colors = {
     "Search Queries": "lightseagreen"
 }
 
-# Add edges to the graph
+# Add edges with probabilities to the graph
 for parent, children in nodes.items():
-    for child in children:
-        G.add_edge(parent, child)
-
-# Draw the graph with better layout using pygraphviz
-plt.figure(figsize=(20, 15))
+    for child, prob in children.items():
+        G.add_edge(parent, child, label=f"{prob:.1f}")
 
 # Create a pygraphviz AGraph from the NetworkX graph for better layout
 G_pg = nx.nx_agraph.to_agraph(G)
+G_pg.graph_attr.update(rankdir="TB")  # Set the layout direction to top-to-bottom
+G_pg.node_attr.update(style="filled", fontsize=20)  # Increase font size for nodes
+G_pg.edge_attr.update(fontsize=16)  # Increase font size for edge labels
+
+# Set node colors
+for node in G_pg.nodes():
+    node.attr['fillcolor'] = colors.get(node, "white")
+
+# Draw the graph
+plt.figure(figsize=(20, 30))
 G_pg.layout(prog="dot")  # Use 'dot' layout algorithm for hierarchical graphs
-
-# Draw nodes and edges
-node_colors = [colors.get(node, "white") for node in G.nodes]
-G_pg.draw(path="high_res_graph.png", format="png", prog="dot")
-
-# Display the graph (optional, if you want to display in a notebook)
-plt.title("Queries in Microservices Tree Structure")
-plt.imshow(plt.imread("graph.png"))
-plt.axis("off")
-#plt.show()
-#end
-
-
+G_pg.draw(path="graph.png", format="png")
 

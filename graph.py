@@ -46,7 +46,7 @@ G_pg.draw(path="high_res_graph.png", format="png", prog="dot")
 
 # Display the graph (optional, if you want to display in a notebook)
 plt.title("Queries in Microservices Tree Structure")
-plt.imshow(plt.imread("high_res_graph.png"))
+plt.imshow(plt.imread("graph.png"))
 plt.axis("off")
 plt.show()
 

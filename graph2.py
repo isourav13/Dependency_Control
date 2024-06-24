@@ -61,8 +61,9 @@ leaf_nodes = {
 for parent, services in leaf_nodes.items():
     for service in services:
         G.add_edge(parent, service)
-        G.nodes[service]['color'] = 'lightcoral'
+        G.nodes[service]['color'] = 'red'
         G.nodes[service]['shape'] = 'box'
+
 
 # Create a pygraphviz AGraph from the NetworkX graph for better layout
 G_pg = nx.nx_agraph.to_agraph(G)

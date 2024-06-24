@@ -1,8 +1,7 @@
-# This code has microservices tagged to the leaf nodes
-
 import networkx as nx
 import matplotlib.pyplot as plt
 import pygraphviz as pgv
+import matplotlib.patches as mpatches
 
 # Create a directed graph
 G = nx.DiGraph()
@@ -33,8 +32,6 @@ colors = {
     "Update": "lightgreen",
     "Upsert": "lightgreen",
     "Delete": "lightgreen"
-
-
 }
 
 # Add edges with probabilities to the graph
@@ -71,7 +68,6 @@ for parent, services in leaf_nodes.items():
         G.nodes[service]['color'] = 'red'
         G.nodes[service]['shape'] = 'box'
 
-
 # Create a pygraphviz AGraph from the NetworkX graph for better layout
 G_pg = nx.nx_agraph.to_agraph(G)
 G_pg.graph_attr.update(rankdir="LR")  # Set the layout direction to left-to-right
@@ -89,3 +85,24 @@ for node in G_pg.nodes():
 plt.figure(figsize=(30, 20))  # Adjust figsize to accommodate left-to-right layout
 G_pg.layout(prog="dot")  # Use 'dot' layout algorithm for hierarchical graphs
 G_pg.draw(path="graph.png", format="png")
+
+# Load the drawn graph
+img = plt.imread("graph.png")
+plt.figure(figsize=(30, 20))
+plt.imshow(img)
+plt.axis('off')
+
+# Create the legend
+legend_elements = [
+    mpatches.Patch(color='lightseagreen', label='Queries'),
+    mpatches.Patch(color='green', label='Read/Write Queries'),
+    mpatches.Patch(color='lightgreen', label='Leaf Nodes'),
+    mpatches.Patch(color='white', label='Leaf Nodes'),
+    mpatches.Patch(color='red', label='Microservices')
+]
+
+# Add legend to the graph
+plt.legend(handles=legend_elements, loc='upper left', fontsize=14)
+
+# Show the final plot with the legend
+plt.savefig("graph.png")

@@ -51,7 +51,7 @@ leaf_nodes = {
     "Left Joins": ["Customer Information Service", "Product Review Service"],
     "Right Joins": ["Vendor Service"],
     "Full Joins": ["Customer Information Service"],
-    "Single Create": ["Customer Information Service", "Catalog Upload Service"],
+    "Single Create": ["Customer Information Service", "Wishlist Service", "Order Service"],
     "Bulk Create": ["Bulk Catalog Upload Service", "Order Service"],
     "Full Update": ["Catalog Service", "Customer Information Service"],
     "Partial Update (Patch)": ["Customer Preferences Service", "Order Service"],
@@ -110,7 +110,7 @@ for node in G_pg.nodes():
 # Set leaf node colors and labels
 for service, prob in cumulative_probs.items():
     node = G_pg.get_node(service)
-    node.attr['label'] = f"{service}\n{prob:.2f}"
+    node.attr['label'] = f"{service}: {prob:.2f}"
     node.attr['fillcolor'] = get_color(prob)
 
 # Draw the graph

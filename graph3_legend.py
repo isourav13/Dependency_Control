@@ -94,11 +94,11 @@ plt.axis('off')
 
 # Create the legend
 legend_elements = [
-    mpatches.Patch(color='lightseagreen', label='Queries'),
-    mpatches.Patch(color='green', label='Read/Write Queries'),
-    mpatches.Patch(color='lightgreen', label='Leaf Nodes'),
-    mpatches.Patch(color='white', label='Leaf Nodes'),
-    mpatches.Patch(color='red', label='Microservices')
+    mpatches.Patch(color='lightseagreen', label='Queries', edgecolor= 'black'),
+    mpatches.Patch(color='green', label='Read/Write Queries', edgecolor= 'black'),
+    mpatches.Patch(color='lightgreen', label='Sub Queries', edgecolor= 'black'),
+    mpatches.Patch(color='white', label='Leaf Nodes', edgecolor= 'black'),
+    mpatches.Patch(color='red', label='Microservices', edgecolor= 'black')
 ]
 
 # Add legend to the graph

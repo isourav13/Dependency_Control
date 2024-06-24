@@ -80,8 +80,7 @@ for parent, services in leaf_nodes.items():
         G.add_edge(parent, service)
         G.nodes[service]['color'] = 'red'
         G.nodes[service]['shape'] = 'box'
-        G.nodes[service]['label'] = f"{service}\n{cumulative_probs[service]:.2f}"
-        print(G.nodes[service]['label'])
+        G.nodes[service]['label'] = f"{service}:{cumulative_probs[service]:.2f}"
 
 # Set color based on cumulative probability
 def get_color(prob):
@@ -111,7 +110,7 @@ for node in G_pg.nodes():
 # Set leaf node colors and labels
 for service, prob in cumulative_probs.items():
     node = G_pg.get_node(service)
-    node.attr['label'] = f"{service}\n{prob:.1f}"
+    node.attr['label'] = f"{service}\n{prob:.2f}"
     node.attr['fillcolor'] = get_color(prob)
 
 # Draw the graph

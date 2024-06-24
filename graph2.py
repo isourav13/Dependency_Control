@@ -35,10 +35,10 @@ for parent, children in nodes.items():
 
 # Add microservices as leaf nodes
 leaf_nodes = {
-    "Simple Reads": ["Catalog Service", "User Profile Service"],
+    "Simple Reads": ["Catalog Service", "Authentication Service", "Payment Service"],
     "Range Queries": ["Search Service"],
     "Multi-attribute Filters": ["Search Service"],
-    "Count": ["Cart Service"],
+    "Count": ["Cart Service", "Notification Service"],
     "Sum": ["Cart Service"],
     "Min/Max": ["Catalog Service"],
     "Inner Joins": ["Order History Service", "Support History Service"],
